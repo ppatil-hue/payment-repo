@@ -4,7 +4,7 @@ from pay.credit_card import CreditCard
 import re
 
 
-def _validate_key(key: str) -> str:
+def validate_key(key: str) -> str:
     uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
     if not re.match(uuid_pattern, key):
         raise ValueError("Invalid key")
@@ -14,8 +14,8 @@ def _validate_key(key: str) -> str:
 
 class PaymentProcessor:
 
-    def __int__(self, key: str = "Valid") -> None:
-        self.api_key = _validate_key(key)
+    def __init__(self, key: str = "6cfb67f3-6281-4031-b893-ea85db0dce20") -> None:
+        self.api_key = validate_key(key)
 
     def charge(self, card: CreditCard, amount: int) -> None:
         if not self.validate_card(card):
